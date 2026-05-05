@@ -7,9 +7,9 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Any, Dict
 try:
-    from .rag_query import answer_question
+    from .rag_query import answer_question, answer_question_debug
 except ImportError:
-    from rag_query import answer_question
+    from rag_query import answer_question, answer_question_debug
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -81,7 +81,30 @@ async def ask(request: AskRequest):
         logger.debug(f"Incoming question: {request.question}")
 
         # Integrate with the RAG query engine
-        answer = answer_question(request.question)
+        debug_info = answer_question_debug(request.question)
+        answer = debug_info.get("answer", "Error generating answer.")
+
+        # --- Detailed observability logging ---
+        ctx = debug_info.get("retrieved_context", {})
+        docs = ctx.get("documents", [])
+        dists = ctx.get("distances", [])
+        metas = ctx.get("metadatas", [])
+        ids = ctx.get("ids", [])
+
+        logger.debug("--- RETRIEVED CONTEXT ---")
+        for i, doc in enumerate(docs):
+            snippet = doc[:150].replace("\n", " ") + "..." if len(doc) > 150 else doc.replace("\n", " ")
+            dist = dists[i] if i < len(dists) else "N/A"
+            meta = metas[i] if i < len(metas) else "N/A"
+            doc_id = ids[i] if i < len(ids) else "N/A"
+            logger.debug(f"Item {i+1} | ID: {doc_id} | Distance: {dist} | Meta: {meta}")
+            logger.debug(f"Snippet: {snippet}")
+
+        logger.debug("--- GEMINI INPUT PROMPT ---")
+        logger.debug(debug_info.get("gemini_prompt"))
+
+        logger.debug("--- GEMINI RAW OUTPUT ---")
+        logger.debug(debug_info.get("gemini_output"))
 
         # Log the response
         logger.debug(f"Generated answer: {answer}")

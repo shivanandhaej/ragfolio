@@ -25,7 +25,7 @@ CHROMA_DB_DIR = os.path.join(
 COLLECTION_NAME = "resume_chunks"
 GEMINI_API_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
-    "gemini-2.5-flash-lite:generateContent"
+    "gemini-2.5-flash:generateContent"
 )
 
 
@@ -133,7 +133,7 @@ def call_gemini(prompt: str) -> str:
 
 def answer_question(question: str) -> str:
     """High-level RAG pipeline: retrieve context, build prompt, call Gemini."""
-    context_chunks = retrieve_context(question, top_k=3)
+    context_chunks = retrieve_context(question, top_k=20)
     if not context_chunks:
         return (
             "I could not find any resume context to answer from. "
@@ -142,3 +142,97 @@ def answer_question(question: str) -> str:
 
     prompt = build_prompt(question, context_chunks)
     return call_gemini(prompt)
+
+
+def retrieve_context_debug(question: str, top_k: int = 3) -> dict:
+    """Debug version of context retrieval returning metadata and distances safely."""
+    if not question.strip():
+        return {"documents": [], "distances": [], "metadatas": [], "ids": []}
+
+    model = _get_embedding_model()
+    collection = _get_chroma_collection()
+    query_embedding = next(model.embed([question]))
+
+    try:
+        result = collection.query(
+            query_embeddings=[query_embedding.tolist()],
+            n_results=top_k,
+            include=["documents", "metadatas", "distances"]
+        )
+    except (ValueError, TypeError):
+        # Fallback if include validation fails on older or newer Chroma versions
+        result = collection.query(
+            query_embeddings=[query_embedding.tolist()],
+            n_results=top_k
+        )
+
+    documents = result.get("documents") or []
+    distances = result.get("distances") or []
+    metadatas = result.get("metadatas") or []
+    ids = result.get("ids") or []
+
+    return {
+        "documents": documents[0] if documents else [],
+        "distances": distances[0] if distances else [],
+        "metadatas": metadatas[0] if metadatas else [],
+        "ids": ids[0] if ids else []
+    }
+
+
+def call_gemini_debug(prompt: str) -> dict:
+    """Debug version of call_gemini returning raw JSON output."""
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "GEMINI_API_KEY environment variable is not set. "
+            "Set it before running the application."
+        )
+
+    headers = {
+        "Content-Type": "application/json",
+        "X-goog-api-key": api_key,
+    }
+    body = {
+        "contents": [{"parts": [{"text": prompt}]}]
+    }
+
+    response = requests.post(GEMINI_API_URL, headers=headers, json=body, timeout=30)
+    response.raise_for_status()
+    data = response.json()
+
+    try:
+        text = data.get("candidates", [])[0].get("content", {}).get("parts", [])[0].get("text", "")
+        if not text:
+            raise KeyError
+        answer = text.strip()
+    except (KeyError, IndexError, TypeError):
+        answer = f"Unexpected response format from Gemini API: {data}"
+
+    return {
+        "answer": answer,
+        "raw_response": data
+    }
+
+
+def answer_question_debug(question: str) -> dict:
+    """High-level RAG pipeline returning answer + debug observability internals."""
+    context_data = retrieve_context_debug(question, top_k=20)
+    context_chunks = context_data.get("documents", [])
+
+    if not context_chunks:
+        return {
+            "answer": "I could not find any resume context to answer from. Make sure the vector store has been built by running rag/ingest.py.",
+            "retrieved_context": context_data,
+            "gemini_prompt": None,
+            "gemini_output": None
+        }
+
+    prompt = build_prompt(question, context_chunks)
+    gemini_result = call_gemini_debug(prompt)
+
+    return {
+        "answer": gemini_result["answer"],
+        "retrieved_context": context_data,
+        "gemini_prompt": prompt,
+        "gemini_output": gemini_result["raw_response"]
+    }
