@@ -42,7 +42,7 @@ export function Projects() {
         <h2 className="text-2xl font-semibold text-white mb-6">Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {projectsData.map((project, index) => (
-            <ProjectCard key={index} data={project} index={index} />
+            <ProjectCard key={project.title} data={project} index={index} />
           ))}
         </div>
       </div>

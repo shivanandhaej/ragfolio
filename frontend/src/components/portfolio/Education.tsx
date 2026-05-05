@@ -51,7 +51,7 @@ export function Education() {
                 <h2 className="text-2xl font-semibold text-white mb-6">Education</h2>
                 <div className="space-y-6">
                     {educationData.map((edu, index) => (
-                        <EducationCard key={index} data={edu} index={index} />
+                        <EducationCard key={edu.title} data={edu} index={index} />
                     ))}
                 </div>
             </div>
