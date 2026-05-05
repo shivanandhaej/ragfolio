@@ -13,20 +13,12 @@ export function Projects() {
             whileHover={{ scale: 1.02 }}
             className="p-6 rounded-xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors cursor-default"
           >
-            <h3 className="font-medium text-white text-lg">Project one</h3>
-            <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Short description of the project and technologies used.</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            className="p-6 rounded-xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors cursor-default"
-          >
-            <h3 className="font-medium text-white text-lg">Project two</h3>
-            <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Short description of the project and technologies used.</p>
+            <h3 className="font-medium text-white text-lg">Real-Time Operating System (RTOS)</h3>
+            <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Designed and developed a lightweight, deterministic RTOS for embedded applications. Implemented task scheduling and resource allocation algorithms to handle strict timing constraints without deadlocks.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-xs px-2 py-1 rounded bg-zinc-800 text-zinc-300">C/C++</span>
+              <span className="text-xs px-2 py-1 rounded bg-zinc-800 text-zinc-300">Microcontrollers</span>
+            </div>
           </motion.div>
         </div>
       </div>

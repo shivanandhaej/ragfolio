@@ -15,30 +15,12 @@ export function Experience() {
                     >
                         <div className="absolute w-3 h-3 bg-blue-500 rounded-full -left-[6.5px] top-1.5 ring-4 ring-zinc-950"></div>
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 className="text-lg font-medium text-white">Software Engineer</h3>
-                            <span className="text-sm text-zinc-500">Jan 2023 - Present</span>
+                            <h3 className="text-lg font-medium text-white">Academic & Practical Experience</h3>
+                            <span className="text-sm text-zinc-500">Jan 2020 - Present</span>
                         </div>
-                        <p className="text-blue-400 text-sm mb-3">Company Name</p>
+                        <p className="text-blue-400 text-sm mb-3">Sree Narayana Guru College of Engineering and Technology</p>
                         <p className="text-zinc-400 text-sm leading-relaxed">
-                            Description of your role and key achievements. Mention specific technologies and impact.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="relative pl-8 border-l border-zinc-800"
-                    >
-                        <div className="absolute w-3 h-3 bg-zinc-700 rounded-full -left-[6.5px] top-1.5 ring-4 ring-zinc-950"></div>
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 className="text-lg font-medium text-white">Intern developer</h3>
-                            <span className="text-sm text-zinc-500">Jun 2022 - Dec 2022</span>
-                        </div>
-                        <p className="text-blue-400 text-sm mb-3">Previous Company</p>
-                        <p className="text-zinc-400 text-sm leading-relaxed">
-                            Description of tasks and what you learned during this period.
+                            Focused on rigorous hands-on project work bridging the gap between hardware and software. Demonstrated strong problem-solving capabilities by independently designing and developing embedded applications and real-time systems.
                         </p>
                     </motion.div>
                 </div>
