@@ -50,8 +50,8 @@ export function Education() {
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-2xl font-semibold text-white mb-6">Education</h2>
                 <div className="space-y-6">
-                    {educationData.map((edu, index) => (
-                        <EducationCard key={edu.title} data={edu} index={index} />
+                    {educationData.map((edu, i) => (
+                        <EducationCard key={edu.title} data={edu} index={i} />
                     ))}
                 </div>
             </div>
