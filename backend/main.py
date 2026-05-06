@@ -20,7 +20,10 @@ app = FastAPI(
     description="An orchestration layer for querying resume data using RAG.",
     version="1.0.0",
 )
-
+from fastapi.responses import RedirectResponse  # Add this import
+@app.get("/", include_in_schema=False)
+async def redirect_to_docs():
+    return RedirectResponse(url="/docs")
 # CORS Configuration for development flexibility
 app.add_middleware(
     CORSMiddleware,
