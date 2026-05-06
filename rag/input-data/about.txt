@@ -1,0 +1,57 @@
+Name: Shiva Nandha E J
+Location: Shivanandha House, P.O Nettur, Mannayad, Thalassery - 670105, Kerala, India
+Phone: 9495745572
+Email: shivanandhaej115@gmail.com
+LinkedIn: https://www.linkedin.com/in/shivanandha-e-j-36979538b
+ 
+---
+ 
+Objective:
+I am an aspiring electronics engineer looking to gain expertise in circuit design, embedded systems, and communication technologies. I aim to work in a reputed organization where I can apply my knowledge of electronics, signal processing, IoT, and wireless communication to develop innovative products. I am passionate about improving my practical skills through real-time projects like IoT devices, robotics, and automation systems.
+ 
+---
+ 
+Experience:
+Fresher — no prior work experience. Eager to learn and contribute to real-world engineering projects.
+ 
+---
+ 
+Education:
+- B.Tech in Electronics Engineering
+  Sree Narayana Guru College of Engineering and Technology
+  2025 – 2029 (currently pursuing)
+ 
+- Plus Two (Higher Secondary)
+  Indira Gandhi Public School
+  Completed: 2025
+ 
+- 10th Standard (Secondary School)
+  Indira Gandhi Public School
+  Completed: 2023
+ 
+---
+ 
+Skills:
+- Programming Languages: C, C++, Python
+- Digital Signal Processing (DSP)
+- Microcontrollers: Arduino, Raspberry Pi
+- IoT (Internet of Things) concepts and devices
+- Embedded Systems design
+- Wireless communication technologies
+- Problem Solving
+- Critical Thinking
+- Teamwork and Collaboration
+ 
+---
+ 
+Projects:
+Project 1: Design and Development of a Real-Time Operating System (RTOS) for Embedded Systems
+- Designed and developed an RTOS tailored for embedded system applications
+- Focused on task scheduling, memory management, and real-time responsiveness
+- Implemented using embedded C on microcontroller hardware
+ 
+---
+ 
+About Me:
+I am Shiva Nandha E J, a first-year B.Tech Electronics Engineering student at Sree Narayana Guru College of Engineering and Technology, Kerala. I am a fresher with strong foundational knowledge in electronics, embedded systems, and programming. I am driven by curiosity and a passion for building hardware and software solutions that solve real-world problems. I enjoy working with microcontrollers, writing code in Python and C++, and exploring the intersection of hardware and software through IoT and automation projects.
+ 
